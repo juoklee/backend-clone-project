@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const config = require('./config/key');
-const port = 3000;
+const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,9 +16,14 @@ mongoose.connect(config.mongoURI, {
 }).then(() => console.log('MongoDB Connected..'))
 .catch(err => console.log(err))
 
+app.get('/', (req, res) => res.send('Hello World! 안녕하세요~'));
 
+app.get('/api/main', (req, res) => {res.send('Hello World!')});
 
-app.get('/', (req, res) => {res.send('Hello World!')})
+/* signupPage */
+app.get('/api/login', (req, res) => {
+
+});
 
 
 app.listen(port, () => {console.log(`Example app listening on port ${port}`)})
