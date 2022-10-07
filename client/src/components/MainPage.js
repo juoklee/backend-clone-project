@@ -17,6 +17,7 @@ function MainPage() {
             <h2>메인 페이지</h2>
             <br/>
             <Link to="/signup">회원가입 페이지</Link>
+            <br/>
             <Link to="/login">로그인 페이지</Link>
         </div>
     )

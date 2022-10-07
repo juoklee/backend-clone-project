@@ -1,5 +1,4 @@
 // CORS 오류 방지을 위한 proxy 수동 설정
-
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
