@@ -15,4 +15,26 @@ router.post("/signup", (req, res) => {
 
 });
 
+router.post("/login", (req, res) => {
+    console.log( req.body );
+
+    User.findOne({ email: req.body.email }, (err, user) => {
+        // email이 없을 때
+        if(!user) {
+            return res.json({ loginSuccess: false, message: "Auth failed, email not found" });
+        }
+        // password 비교
+        user.comparePassword(req.body.password, (err, isMatch) => {
+            // password가 맞지 않을 때
+            if(!isMatch) {
+                return res.json({ loginSuccess: false, message: "Wrong password" });
+            }
+
+            //jwt 생성
+            
+
+        })
+    })
+})
+
 module.exports = router;
