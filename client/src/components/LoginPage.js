@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -27,6 +27,8 @@ function LoginPage() {
         axios.post("http://localhost:8000/api/users/login", body).then((response) => console.log(response));
     };
 
+    
+
     return (
         <div>
             <h3>로그인 페이지</h3>
@@ -39,6 +41,7 @@ function LoginPage() {
                 <label>Password</label>
                 <input type="password" value={Password} onChange={onPasswordHandler}></input>
                 <br/>
+                <button type="submit">login</button>
             </form>
 
             <br/>

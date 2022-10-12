@@ -1,6 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
+const { auth } = require("../middleware/auth")
+
+
+
+router.get("/auth", auth, (req, res) => {
+
+    //여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication이 True라는 말
+    res.status(200).json({
+        _id: req.user._id,
+        isAdmin: req.user.role === 0 ? false : true,
+        isAuth: true,
+        email: req.user.email,
+        name: req.user.name,
+    });
+});
 
 router.post("/signup", (req, res) => {
     console.log( req.body );
@@ -31,8 +46,16 @@ router.post("/login", (req, res) => {
             }
 
             //jwt 생성
-            
-
+            user.generateToken((err, user) => {
+                if (err) return res.status(400).send(err);
+                res.cookie("w_authExp", user.tokenExp);
+                res
+                    .cookie("w_auth", user.token)
+                    .status(200)
+                    .json({
+                        loginSuccess: true, userId: user._id
+                    });
+            });
         })
     })
 })

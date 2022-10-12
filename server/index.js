@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const config = require('./config/key');
 
@@ -16,6 +17,7 @@ mongoose.connect(config.mongoURI, {
 /* middleware */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 /* cors */
 app.use(cors());
